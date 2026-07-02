@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آی‌تی‌یار</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">آی‌تی‌یار</div>
+        <!-- اسلایدر موقتاً مخفی -->
+        <div class="swiper mySwiper" style="display: none;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="banner1.jpg" alt="شبکه"></div>
+                <div class="swiper-slide"><img src="banner2.jpg" alt="کامپیوتر"></div>
+                <div class="swiper-slide"><img src="banner3.jpg" alt="لپ‌تاپ"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </header>
+
+    <!-- تب‌ها (بالا – کاملاً داخل کادر در موبایل) -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="openTab('network')">تجهیزات شبکه</button>
+        <button class="tab-btn" onclick="openTab('computer')">خرید کامپیوتر</button>
+        <button class="tab-btn" onclick="openTab('laptop')">پیشنهاد لپ‌تاپ</button>
+        <button class="tab-btn" onclick="openTab('about')">درباره اپ</button>
+    </div>
+
+    <!-- محتوای تب‌ها -->
+    <div class="tab-content">
+        <!-- شبکه -->
+        <div id="network" class="tab-page">
+            <h2>راهنمایی تجهیزات شبکه</h2>
+            <form id="network-form">
+                <label>تعداد کاربران تقریبی:</label>
+                <select name="users">
+                    <option value="1-10">۱ تا ۱۰ نفر</option>
+                    <option value="11-50">۱۱ تا ۵۰ نفر</option>
+                    <option value="51+">بیش از ۵۰ نفر</option>
+                </select>
+
+                <label>تعداد طبقات ساختمان:</label>
+                <input type="number" name="floors" min="1" placeholder="مثلاً ۳">
+
+                <label>مساحت تقریبی ساختمان (متر مربع):</label>
+                <input type="number" name="area" placeholder="مثلاً ۵۰۰">
+
+                <label>کابل‌کشی خارج از ساختمان دارید؟</label>
+                <input type="checkbox" name="outdoor"> بله
+                <input type="number" name="outdoor-length" placeholder="طول تقریبی (متر)" class="hidden">
+
+                <label>نیاز به امنیت بالا؟</label>
+                <input type="checkbox" name="high-security">
+
+                <label>بودجه تقریبی (تومان):</label>
+                <input type="number" name="budget" placeholder="اختیاری">
+
+                <button type="button" class="submit-btn" onclick="submitNetwork()">دریافت پیشنهاد</button>
+            </form>
+            <div id="network-results" class="results hidden"></div>
+        </div>
+
+        <!-- کامپیوتر -->
+        <div id="computer" class="tab-page hidden">
+            <h2>راهنمایی خرید کامپیوتر</h2>
+            <form id="computer-basic-form">
+                <label>کاربرد اصلی:</label>
+                <select name="usage">
+                    <option value="daily">امور روزمره</option>
+                    <option value="programming">برنامه‌نویسی</option>
+                    <option value="graphic">کار گرافیکی</option>
+                    <option value="gaming">گیمینگ حرفه‌ای</option>
+                </select>
+
+                <label>اهمیت سایز و کیفیت مانیتور (۱ تا ۱۰):</label>
+                <input type="range" name="screen-importance" min="1" max="10" value="5">
+                <span class="range-value">5</span>
+
+                <label>اهمیت قدرت سخت‌افزار (۱ تا ۱۰):</label>
+                <input type="range" name="hardware-importance" min="1" max="10" value="5">
+                <span class="range-value">5</span>
+
+                <label>بودجه تقریبی (تومان):</label>
+                <input type="number" name="budget" placeholder="اختیاری">
+
+                <button type="button" class="submit-btn" onclick="submitComputerBasic()">دریافت پیشنهاد</button>
+            </form>
+            <div id="computer-results" class="results hidden"></div>
+        </div>
+<!-- لپ‌تاپ -->
+        <div id="laptop" class="tab-page hidden">
+            <h2>پیشنهاد خرید لپ‌تاپ</h2>
+            <form id="laptop-form">
+                <label>کاربرد اصلی:</label>
+                <select name="usage">
+                    <option value="daily">امور روزمره</option>
+                    <option value="programming">برنامه‌نویسی</option>
+                    <option value="graphic">کار گرافیکی</option>
+                    <option value="gaming">گیمینگ</option>
+                </select>
+
+                <label>برند مورد علاقه:</label>
+                <select name="brand">
+                    <option value="">مهم نیست</option>
+                    <option value="lenovo">Lenovo</option>
+                    <option value="asus">ASUS</option>
+                    <option value="msi">MSI</option>
+                    <option value="apple">Apple</option>
+                </select>
+
+                <label>بودجه تقریبی (تومان):</label>
+                <input type="number" name="budget" placeholder="اختیاری">
+
+                <button type="button" class="submit-btn" onclick="submitLaptop()">دریافت پیشنهاد</button>
+            </form>
+            <div id="laptop-results" class="results hidden"></div>
+        </div>
+
+        <!-- درباره اپ -->
+        <div id="about" class="tab-page hidden">
+            <div class="about-content">
+                <h2>درباره آی‌تی‌یار</h2>
+                <p>آی‌تی‌یار یک ابزار هوشمند و رایگان است که به شما کمک می‌کند:</p>
+                <ul>
+                    <li>بهترین تجهیزات شبکه را برای سازمان یا منزل خود انتخاب کنید</li>
+                    <li>کامپیوتر مناسب با کاربرد و بودجه خود را بسازید</li>
+                    <li>لپ‌تاپ ایده‌آل برای امور روزمره، برنامه‌نویسی، گرافیک یا گیمینگ پیدا کنید</li>
+                </ul>
+                <p>تمام پیشنهادها بر اساس استانداردهای روز بازار ایران و با قیمت‌های تقریبی ارائه می‌شود.</p>
+                <p style="margin-top:40px; font-weight:bold; color:#001F3F; font-size:18px;">طراحی و توسعه توسط ELVANAS</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
